@@ -4,20 +4,20 @@ import { User } from './user.entity';
 @Entity()
 export class Skill {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  category: string;
+  category!: string;
 
   @Column()
-  experience: string;
+  experience!: string;
 
   @Column()
-  nature: string; // 'onsite' or 'online'
+  nature!: string; // 'onsite' or 'online'
 
   @Column()
-  hourlyRate: number;
+  hourlyRate!: number;
 
-  @ManyToOne(() => User)
-  provider: User;
+  @ManyToOne(() => User, (user) => user.skills)
+  provider!: User;
 }

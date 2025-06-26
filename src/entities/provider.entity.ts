@@ -1,12 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class Provider {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  type: string; // 'individual' or 'company'
+  type!: string; // 'individual' or 'company'
 
   @Column({ nullable: true })
   fullName?: string;
@@ -30,5 +30,5 @@ export class User {
   address?: string;
 
   @Column()
-  password: string; // Hashed
+  password!: string; // Hashed
 }

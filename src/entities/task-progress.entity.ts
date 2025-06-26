@@ -1,27 +1,21 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  CreateDateColumn,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Task } from './task.entity';
 import { User } from './user.entity';
 
 @Entity()
 export class TaskProgress {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
-  @ManyToOne(() => Task)
-  task: Task;
+  @ManyToOne(() => Task, (task) => task.progress)
+  task!: Task;
 
-  @ManyToOne(() => User)
-  provider: User;
+  @ManyToOne(() => User, (user) => user.taskProgress)
+  provider!: User;
 
   @Column()
-  description: string;
+  description!: string;
 
-  @CreateDateColumn()
-  timestamp: Date;
+  @Column()
+  timestamp!: Date;
 }

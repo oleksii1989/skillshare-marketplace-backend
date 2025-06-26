@@ -1,35 +1,49 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { User } from './user.entity';
+import { Offer } from './offer.entity';
+import { TaskProgress } from './task-progress.entity';
 
 @Entity()
 export class Task {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  category: string;
+  category!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  description: string;
+  description!: string;
 
   @Column()
-  startDate: Date;
+  startDate!: Date;
 
   @Column()
-  workingHours: number;
+  workingHours!: number;
 
   @Column()
-  hourlyRate: number;
+  hourlyRate!: number;
 
   @Column()
-  currency: string;
+  currency!: string;
 
-  @ManyToOne(() => User)
-  user: User;
+  @ManyToOne(() => User, (user) => user.tasks)
+  user!: User;
 
-  @Column({ default: 'open' })
-  status: string; // 'open', 'in_progress', 'completed'
+  @Column()
+  status!: string; // 'open', 'in_progress', 'completed'
+
+  @OneToMany(() => Offer, (offer) => offer.task)
+  offers!: Offer[];
+
+  @OneToMany(() => TaskProgress, (progress) => progress.task)
+  progress!: TaskProgress[];
 }

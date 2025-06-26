@@ -5,14 +5,14 @@ import { User } from './user.entity';
 @Entity()
 export class Offer {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
-  @ManyToOne(() => Task)
-  task: Task;
+  @ManyToOne(() => Task, (task) => task.offers)
+  task!: Task;
 
-  @ManyToOne(() => User)
-  provider: User;
+  @ManyToOne(() => User, (user) => user.offers)
+  provider!: User;
 
   @Column()
-  status: string; // 'pending', 'accepted', 'rejected'
+  status!: string; // 'pending', 'accepted', 'rejected'
 }
