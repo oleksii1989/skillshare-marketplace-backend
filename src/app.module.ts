@@ -3,6 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { User } from './entities/user.entity';
+import { Task } from './entities/task.entity';
+import { Skill } from './entities/skill.entity';
+import { Offer } from './entities/offer.entity';
+import { TaskProgress } from './entities/task-progress.entity';
+import { Provider } from './entities/provider.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,11 +23,12 @@ import { AppService } from './app.service';
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        entities: [User, Task, Skill, Offer, TaskProgress, Provider],
         synchronize: true, // Set to false in production
       }),
       inject: [ConfigService],
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
